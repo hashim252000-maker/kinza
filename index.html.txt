@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Kinza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top, #1b1b1b, #000);
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 700px;
+      padding: 40px;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: slideUp 1.5s ease forwards;
+    }
+
+    .typing {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      border-right: 2px solid rgba(255,255,255,0.6);
+      padding-right: 6px;
+      animation: blink 0.9s infinite;
+    }
+
+    .heart {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #ff4d6d;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #ff4d6d;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -7px; left: 0; }
+    .heart::after { left: -7px; top: 0; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh) rotate(45deg); }
+      to { transform: translateY(-10vh) rotate(45deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Kinza</h1>
+    <div id="text" class="typing"></div>
+  </div>
+
+  <script>
+    const message = `Some people change your life quietly,
+without asking,
+without trying.
+
+You did that.
+
+This is just a small reminder
+that you matter to me
+more than words usually allow.`;
+
+    const textEl = document.getElementById('text');
+    let index = 0;
+
+    function type() {
+      if (index < message.length) {
+        textEl.textContent += message.charAt(index);
+        index++;
+        setTimeout(type, 45);
+      }
+    }
+
+    type();
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createHeart, 600);
+  </script>
+
+</body>
+</html>
